@@ -4,11 +4,11 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 
 // import Control_Risk from "./control_risk_list.component";
 
-class Home extends Component {
+class Work_Env_Manager_Dashboard extends Component {
 
 	render() {
 
-		console.log(this);
+		// console.log(this);
 
 		return(
 
@@ -16,7 +16,7 @@ class Home extends Component {
 
 				<p className = 'container'>
 
-					<Link className ="btn btn-primary" to = { this.props.match.url.concat('work_env_manag_home')}>
+					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('work_env_manag_home')}>
 
 						Encargado de clima laboral
 							
@@ -26,7 +26,7 @@ class Home extends Component {
 
 				<p className = 'container'>
 
-					<Link className ="btn btn-primary" to = { this.props.match.url.concat('control_risk_consult')}>
+					<Link className ="btn btn-info btn-block" to = { this.props.match.url.concat('dashboard_worker')}>
 
 	                    Trabajador
 
@@ -42,4 +42,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default Work_Env_Manager_Dashboard;

@@ -14,7 +14,7 @@ class Work_Environment_Manager_Home extends Component {
 
 				<p className = 'container'>
 
-					<Link className ="btn btn-primary" to = { this.props.match.url.concat('/create_new_group')}>
+					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/create_new_group')}>
 
 						Crear nueva empresa para monitorear
 							
@@ -24,7 +24,7 @@ class Work_Environment_Manager_Home extends Component {
 
 				<p className = 'container'>
 
-					<Link className ="btn btn-primary" to = { this.props.match.url.concat('control_risk_consult')}>
+					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/dashboard_group')}>
 
 	                    Ver empresa
 

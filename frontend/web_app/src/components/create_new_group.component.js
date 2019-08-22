@@ -25,7 +25,9 @@ class Create_New_Group extends Component {
 
 	on_submit() {
 
-		console.log("oaijsoia");
+		// console.log(this);
+
+		this.props.history.push('/work_env_manag_home/dashboard_group/');
 
 	};
 	
@@ -36,6 +38,12 @@ class Create_New_Group extends Component {
 		return(
 
 			<div className = 'container'>
+
+				<h2>
+
+					Crear nueva empresa para monitorear
+
+				</h2>
 
 				<form onSubmit={this.on_submit}>
 
@@ -66,7 +74,7 @@ class Create_New_Group extends Component {
 
 		            <div className="form-group">
 
-		                <input type="submit" value = "Crear empresa" className="btn btn-primary" />
+		                <input type="submit" value = "Crear empresa" className="btn btn-primary btn-block" />
 
 		            </div>
 
