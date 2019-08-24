@@ -2,6 +2,37 @@ let Group = require('../models/group.model');
 
 module.exports = function(routes){
 
+	// routing for find some group
+	routes.route('/group/:id_group/:password').get(function(req, res) {
+
+		console.log(req.params);
+
+		// Pick up the instances
+		Group.find({_id: req.params.id_group, password: req.params.password}, function(err, group) {
+
+			// if it gets error
+			if (err) {
+
+				// display error in console
+				console.log(err);
+
+				// send error
+				res.status(500).send(err);
+
+			} else {
+
+				// console.log('found');
+				// console.log(group);
+
+				// return instace
+				res.json(group);
+
+			};
+
+		});
+
+	});
+
 	// Routing control for get requests
 	routes.route('/groups').get(function(req, res) {
 
@@ -96,7 +127,7 @@ module.exports = function(routes){
 			// if correctly saved
 			.then( group => {
 
-				res.status(200).json({'group': 'Group added successfully'});
+				res.status(200).json(group);
 
 			})
 

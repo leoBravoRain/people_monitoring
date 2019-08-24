@@ -45,8 +45,11 @@ require('./routes/areas.routes')(routes);
 // Add Daily Questions routes from own file
 require('./routes/daily_questions.routes')(routes);
 
-// Add Daily Questions routes from own file
+// Add Message from worker routes from own file
 require('./routes/message_from_worker.routes')(routes);
+
+// Add Action of manager routes from own file
+require('./routes/actions_of_manager.routes')(routes);
 
 // app is listening
 app.listen(PORT, function() {
