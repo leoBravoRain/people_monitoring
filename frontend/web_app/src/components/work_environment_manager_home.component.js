@@ -24,7 +24,7 @@ class Work_Environment_Manager_Home extends Component {
 
 				<p className = 'container'>
 
-					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/dashboard_group')}>
+					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/login_to_group')}>
 
 	                    Ver empresa
 

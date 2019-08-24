@@ -15,6 +15,7 @@ import Create_New_Area from './components/create_new_area.component';
 import Dashboard_Areas from './components/dashboard_areas.component';
 import Dashboard_Worker from './components/worker_dashboard.component';
 import Login_Worker from './components/login_worker.component';
+import Login_to_Group from './components/login_to_group.component';
 
 // Component 
 class App extends Component {
@@ -60,11 +61,13 @@ class App extends Component {
 
         <Route path = '/' exact component = {Home} />
         <Route path = '/work_env_manag_home/' exact component = {Work_Environment_Manager_Home} />
+        <Route path = '/work_env_manag_home/login_to_group/' exact component = {Login_to_Group} />
         <Route path = '/work_env_manag_home/create_new_group/' exact component = {Create_New_Group} />
         {/* <Route path = '/work_env_manag_home/dashboard_group' exact component = {Work_Env_Manager_Dashboard} /> */}
-        <Route path = '/work_env_manag_home/dashboard_group/' exact component = {Work_Env_Manager_Dashboard} />
+        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/' exact component = {Work_Env_Manager_Dashboard} />
         <Route path = '/work_env_manag_home/dashboard_group/create_new_area/' exact component = {Create_New_Area} />
-        <Route path = '/work_env_manag_home/dashboard_group/dashboard_area/:area_name' exact  component = {Dashboard_Areas} />
+        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/dashboard_area/:area_id/:area_name' exact  component = {Dashboard_Areas} />
+
         <Route path = '/dashboard_worker/:area_id/:area_name' exact component = {Dashboard_Worker} />
         <Route path = '/login_worker/' exact component = {Login_Worker} />
       </Router>

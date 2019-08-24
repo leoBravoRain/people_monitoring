@@ -3,17 +3,19 @@ import React, { Component } from "react";
 import { BrowserRouter as Route, Link } from "react-router-dom";
 
 // import Control_Risk from "./control_risk_list.component";
+// make request to server
+import axios from 'axios';
 
-// fake data
-var areas = [
+// // fake data
+// var areas = [
 
-	{name: 'Mantención'},
-	{name: 'Area de Producción 1'},
-	{name: 'Area de Producción 2'},
-	{name: 'Finanzas'},
-	{name: 'Recursos Humanos'},
-	{name: 'Marketing'}
-];
+// 	{name: 'Mantención'},
+// 	{name: 'Area de Producción 1'},
+// 	{name: 'Area de Producción 2'},
+// 	{name: 'Finanzas'},
+// 	{name: 'Recursos Humanos'},
+// 	{name: 'Marketing'}
+// ];
 
 class Home extends Component {
 
@@ -23,11 +25,13 @@ class Home extends Component {
 		// constructur of parent
 		super(props);
 
+		// console.log(this);
+
 		// initial states
 		this.state = {
 
-			group_name: 'Future Inc',
-			areas: areas,
+			group_name: this.props.match.params.group_name,
+			areas: [],
 		}
 
 		this.create_area_button = this.create_area_button.bind(this);
@@ -38,6 +42,38 @@ class Home extends Component {
 
 		this.props.history.push('/work_env_manag_home/dashboard_group/create_new_area/');
 		// this.props.match.url.concat('/work_env_manag_home/dashboard_group/create_new_group');
+
+	};
+
+	componentDidMount() {
+
+		// get request for get data
+        axios.get('http://192.168.1.9:4000/people_monitoring/areas/' + this.props.match.params.group_id)
+
+        	// if ok
+            .then(response => {
+
+            	// get data from API
+            	const areas = response.data;
+
+            	// update state
+            	this.setState({
+
+            		areas: areas,
+
+            	});
+
+            })
+
+            // if error
+            .catch(function (error){
+
+            	window.confirm('Ups, tuvimos un error, ¡Vuelve a intentarlo mas tarde!');
+            	// dislpay error in console
+                console.log(error);
+
+            });
+
 
 	};
 
@@ -92,7 +128,7 @@ class Home extends Component {
 									<td> {idx + 1} </td>
 									<td> 
 
-										<Link to = { this.props.match.url.concat('/dashboard_area/', area.name)}>
+										<Link to = { this.props.match.url.concat('dashboard_area/', area._id, '/', area.name)}>
 
 											{area.name} 
 												
