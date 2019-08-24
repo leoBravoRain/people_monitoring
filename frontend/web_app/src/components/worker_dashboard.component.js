@@ -5,6 +5,7 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 import Daily_Question from "./daily_question.component";
 import Worker_Message from './worker_message.component';
 
+
 class Dashboard_Worker extends Component {
 
 	render() {
@@ -19,13 +20,13 @@ class Dashboard_Worker extends Component {
 
 					<h1>
 
-						Area de Operaciones de Calderas en empresa Future Inc.
+						Area: {this.props.match.params.area_name}
 							
 					</h1>
 
-					<Daily_Question />
+					<Daily_Question area_id = {this.props.match.params.area_id}/>
 
-					<Worker_Message />
+					<Worker_Message area_id = {this.props.match.params.area_id}/>
 
 				</div>
         

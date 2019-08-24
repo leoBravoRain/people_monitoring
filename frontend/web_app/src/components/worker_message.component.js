@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import { BrowserRouter as Route, Link } from "react-router-dom";
 
-// import Control_Risk from "./control_risk_list.component";
+// make request to server
+import axios from 'axios';
 
 class Worker_Message extends Component {
 
@@ -15,28 +16,61 @@ class Worker_Message extends Component {
 		// initial states
 		this.state = {
 
-			// name: null,
+			message: '',
 			// password: null,
 		}
 
-		this.on_submit = this.on_submit.bind(this);
 		this.on_submit_message = this.on_submit_message.bind(this);
+		this.handle_change = this.handle_change.bind(this);
+	};
+
+	// handle change in input text
+	handle_change(event) {
+
+		// update state
+		this.setState({
+
+			message: event.target.value
+
+		});
 
 	};
 
-	on_submit() {
+	// on submit form
+	on_submit_message(event) {
 
-		// console.log('Submit');
-		window.confirm("¡Gracias por hacernos saber!");
-		// this.props.history.push('/work_env_manag_home/dashboard_group/');
+		// prevent default
+		event.preventDefault();
+		
+		// build body for post request
+		const message_ = {
+
+			message: this.state.message,
+			area: this.props.area_id,
+		};
+
+		// post request
+        axios.post('http://192.168.1.9:4000/people_monitoring/add_message_from_worker/', message_)
+
+        	// if ok
+            .then(response => {
+
+        		// console.log('Submit');
+        		window.confirm("¡Tu mensaje ha sido enviado correctamente!");
+
+            })
+
+            // if error
+            .catch(function (error){
+
+            	// user message
+            	window.confirm('Ups, tuvimos un problema, ¡vuelve a intentarlo mas tarde!');
+            	// dislpay error in console
+                console.log(error);
+
+            });
 
 	};
-
-	on_submit_message() {
-
-		window.confirm("¡Tu mensaje ha sido enviado correctamente!");
-
-	}
 
 	render() {
 
@@ -58,8 +92,8 @@ class Worker_Message extends Component {
 
 		                <input  type="text"
 		                        className="form-control"
-		                        value = {this.state.name}
-		                        onChange={this.handleChange}
+		                        value = {this.state.message}
+		                        onChange={this.handle_change}
 	                    />
 
 		            </div>

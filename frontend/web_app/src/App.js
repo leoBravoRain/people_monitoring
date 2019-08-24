@@ -14,6 +14,7 @@ import Work_Env_Manager_Dashboard from './components/work_environment_manager_da
 import Create_New_Area from './components/create_new_area.component';
 import Dashboard_Areas from './components/dashboard_areas.component';
 import Dashboard_Worker from './components/worker_dashboard.component';
+import Login_Worker from './components/login_worker.component';
 
 // Component 
 class App extends Component {
@@ -64,7 +65,8 @@ class App extends Component {
         <Route path = '/work_env_manag_home/dashboard_group/' exact component = {Work_Env_Manager_Dashboard} />
         <Route path = '/work_env_manag_home/dashboard_group/create_new_area/' exact component = {Create_New_Area} />
         <Route path = '/work_env_manag_home/dashboard_group/dashboard_area/:area_name' exact  component = {Dashboard_Areas} />
-        <Route path = '/dashboard_worker/' exact component = {Dashboard_Worker} />
+        <Route path = '/dashboard_worker/:area_id/:area_name' exact component = {Dashboard_Worker} />
+        <Route path = '/login_worker/' exact component = {Login_Worker} />
       </Router>
 
     );

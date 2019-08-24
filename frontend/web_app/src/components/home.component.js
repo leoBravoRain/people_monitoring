@@ -26,7 +26,7 @@ class Work_Env_Manager_Dashboard extends Component {
 
 				<p className = 'container'>
 
-					<Link className ="btn btn-info btn-block" to = { this.props.match.url.concat('dashboard_worker')}>
+					<Link className ="btn btn-info btn-block" to = { this.props.match.url.concat('login_worker')}>
 
 	                    Trabajador
 

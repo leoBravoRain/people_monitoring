@@ -4,6 +4,9 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 
 // import Control_Risk from "./control_risk_list.component";
 
+// make request to server
+import axios from 'axios';
+
 class Daily_Question extends Component {
 
 	// constructor
@@ -23,11 +26,36 @@ class Daily_Question extends Component {
 
 	};
 
-	on_submit() {
+	// on submit function
+	on_submit(calification) {
 
-		// console.log('Submit');
-		window.confirm("¡Gracias por hacernos saber!");
-		// this.props.history.push('/work_env_manag_home/dashboard_group/');
+		// build body for post request
+		const calification_ = {
+
+			calification: calification,
+			area: this.props.area_id,
+		};
+
+		// post request
+        axios.post('http://192.168.1.9:4000/people_monitoring/add_daily_question/', calification_)
+
+        	// if ok
+            .then(response => {
+
+        		// console.log('Submit');
+        		window.confirm("¡Gracias por hacernos saber!");
+
+            })
+
+            // if error
+            .catch(function (error){
+
+            	// user message
+            	window.confirm('Ups, tuvimos un problema, ¡vuelve a intentarlo mas tarde!');
+            	// dislpay error in console
+                console.log(error);
+
+            });
 
 	};
 
@@ -43,38 +71,39 @@ class Daily_Question extends Component {
 						
 				</h4>
 
-				<form onSubmit={this.on_submit}>
 
-		            <div className="form-group"> 
+				<div className = 'container'>
+
+		            <div className="container"> 
 
 		                <label> ¿Como te sientes hoy día en tu área de trabajo? </label>
 
 					</div>
 		                
-	                <div className = 'form-group'>
+	                <div className = 'container'>
 
-		                <input  type="submit"
-		                        value = "Mal" 
-		                        className="btn btn-danger btn-block"
-	                    />
+		                <button onClick = {() => this.on_submit(-1)} type="button" className ="btn btn-danger btn-block"> 
 
-	                    <input  type="submit"
-		                        value = "Normal" 
-		                        className="btn btn-warning btn-block"
-	                    />
+							Mal
 
-	                    <input  type="submit"
-		                        value = "Bien" 
-		                        className="btn btn-info btn-block"
-	                    />
+						</button>
 
-		            </div>
+	                    <button onClick = {() => this.on_submit(0)} type="button" className ="btn btn-warning btn-block"> 
 
-		        </form>
+							Normal
 
+						</button>
 
+						<button onClick = {() => this.on_submit(1)} type="button" className ="btn btn-primary btn-block"> 
 
-        
+							Bien
+
+						</button>
+
+					</div>
+
+	            </div>
+
 			</div>
 
 		);
