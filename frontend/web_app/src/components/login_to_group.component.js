@@ -98,6 +98,12 @@ class Login_to_Group extends Component {
 
 				</h2>
 
+				<div class="alert alert-primary" role="alert">
+
+					Si es que olvidaste el ID o contraseña de tu empresa, ponte en contacto con el administrador de la plataforma
+
+				</div>
+
 				<form onSubmit={this.on_submit}>
 
 		            <div className="form-group"> 
@@ -117,7 +123,7 @@ class Login_to_Group extends Component {
 		                <label> Contraseña: </label>
 
 		                <input 
-		                        type="text" 
+		                        type="password" 
 		                        className="form-control"
 		                        value={this.state.password}
 		                        onChange={this.on_change_input_password}

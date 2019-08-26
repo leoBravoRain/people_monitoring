@@ -86,6 +86,12 @@ class Login_Worker extends Component {
 
 				</h2>
 
+				<div class="alert alert-primary" role="alert">
+
+					Recuerda pedirle el ID de tu área de trabajo al encargado de clima laboral de tu empresa
+
+				</div>
+
 				<form onSubmit={this.on_submit}>
 
 		            <div className="form-group"> 

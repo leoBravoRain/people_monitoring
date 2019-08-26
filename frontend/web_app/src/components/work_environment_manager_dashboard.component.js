@@ -40,7 +40,9 @@ class Home extends Component {
 
 	create_area_button() {
 
-		this.props.history.push('/work_env_manag_home/dashboard_group/create_new_area/');
+		console.log(this)
+		const url = '/work_env_manag_home/dashboard_group/';
+		this.props.history.push(url.concat(this.props.match.params.group_id, '/', this.props.match.params.group_name, '/', 'create_new_area'));
 		// this.props.match.url.concat('/work_env_manag_home/dashboard_group/create_new_group');
 
 	};
@@ -91,9 +93,45 @@ class Home extends Component {
 
 				</h2>
 
+				<div className="alert alert-primary" role="alert">
+
+					<p>
+
+						Recuerda guardar en algún lugar el ID de la empresa, ya que 
+						para ingresar a esta sección, debes ingresar el ID 
+						(junto a la contraseña que ingresaste al registrar la empresa).
+
+					</p>
+
+					<p>
+
+						Si no recuerdas la contraseña, ponte en contacto con los administradores de la plataforma
+
+					</p>
+					
+					<h4>
+
+						ID de empresa:
+
+					</h4>
+
+					<div className="alert alert-danger" role="alert">
+
+						{this.props.match.params.group_id}
+
+					</div>
+
+					<div className="alert alert-danger" role="alert">
+
+						No debes compartir esta ID, esta información es solo para el encargado del clima laboral
+
+					</div>
+
+				</div>
+
 				<p> 
 
-					<button type="button" className ="btn btn-primary" onClick = {this.create_area_button}>Crear nueva area</button>
+					<button type="button" className ="btn btn-primary" onClick = {this.create_area_button}>Crear nueva área</button>
 
 				</p>
 				<div className = 'table table-responsive'>
@@ -106,13 +144,13 @@ class Home extends Component {
 
 								<th> 
 
-									Numero
+									Número
 
 								</th>
 
 								<th>
 
-									Area
+									Área
 
 								</th>
 

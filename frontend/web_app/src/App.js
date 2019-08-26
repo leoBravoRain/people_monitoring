@@ -16,6 +16,7 @@ import Dashboard_Areas from './components/dashboard_areas.component';
 import Dashboard_Worker from './components/worker_dashboard.component';
 import Login_Worker from './components/login_worker.component';
 import Login_to_Group from './components/login_to_group.component';
+import Manager_Action from './components/create_new_action_of_manager.component'
 
 // Component 
 class App extends Component {
@@ -29,7 +30,7 @@ class App extends Component {
 
         <div className="container">
 
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light ">
 
             <Link to="/" className="navbar-brand"> 
 
@@ -59,17 +60,30 @@ class App extends Component {
 
         </div>
 
+        {/* Home */}
         <Route path = '/' exact component = {Home} />
-        <Route path = '/work_env_manag_home/' exact component = {Work_Environment_Manager_Home} />
-        <Route path = '/work_env_manag_home/login_to_group/' exact component = {Login_to_Group} />
-        <Route path = '/work_env_manag_home/create_new_group/' exact component = {Create_New_Group} />
-        {/* <Route path = '/work_env_manag_home/dashboard_group' exact component = {Work_Env_Manager_Dashboard} /> */}
-        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/' exact component = {Work_Env_Manager_Dashboard} />
-        <Route path = '/work_env_manag_home/dashboard_group/create_new_area/' exact component = {Create_New_Area} />
-        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/dashboard_area/:area_id/:area_name' exact  component = {Dashboard_Areas} />
 
-        <Route path = '/dashboard_worker/:area_id/:area_name' exact component = {Dashboard_Worker} />
+        {/* manager home*/}
+        <Route path = '/work_env_manag_home/' exact component = {Work_Environment_Manager_Home} />
+
+        {/* create group /login manager */}
+        <Route path = '/work_env_manag_home/create_new_group/' exact component = {Create_New_Group} />
+        <Route path = '/work_env_manag_home/login_to_group/' exact component = {Login_to_Group} />
+
+        {/*dash board of group */}
+        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/' exact component = {Work_Env_Manager_Dashboard} />
+        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/create_new_area/' exact component = {Create_New_Area} />
+
+        {/* dahsboard of area*/}
+        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/dashboard_area/:area_id/:area_name' exact  component = {Dashboard_Areas} />
+        <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/dashboard_area/:area_id/:area_name/create_new_manager_action' exact component = {Manager_Action} />
+
+        {/* login worker*/}
         <Route path = '/login_worker/' exact component = {Login_Worker} />
+
+      {/* dashboard worker*/}
+        <Route path = '/dashboard_worker/:area_id/:area_name' exact component = {Dashboard_Worker} />
+
       </Router>
 
     );

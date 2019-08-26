@@ -24,10 +24,24 @@ class Dashboard_Worker extends Component {
 							
 					</h1>
 
-					<Daily_Question area_id = {this.props.match.params.area_id}/>
+					<div class="alert alert-success" role="alert">
 
-					<Worker_Message area_id = {this.props.match.params.area_id}/>
+						Puedes estar tranquilo, ya que toda esta información es totalmente ANÓNIMA, por lo que nadie jamás sabrá quien envía esta información
 
+					</div>
+
+					<div class="alert alert-success" role="alert">
+
+						<Daily_Question area_id = {this.props.match.params.area_id}/>
+
+					</div>
+
+					<div class="alert alert-success" role="alert">
+
+						<Worker_Message area_id = {this.props.match.params.area_id}/>
+
+					</div>
+					
 				</div>
         
 			</div>

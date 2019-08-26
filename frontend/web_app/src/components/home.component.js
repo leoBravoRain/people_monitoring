@@ -14,25 +14,41 @@ class Work_Env_Manager_Dashboard extends Component {
 
 			<div className = 'container'>
 
-				<p className = 'container'>
+				<div className="alert alert-primary" role="alert">
 
-					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('work_env_manag_home')}>
+					Con esta plataforma se puede gestionar de mejor forma el ambiente laboral dentro de las áreas de trabajo de tu empresa
 
-						Encargado de clima laboral
-							
-					</Link>
+				</div>
 
-				</p>
+				<div className = 'container'>
 
-				<p className = 'container'>
+					<h2>
 
-					<Link className ="btn btn-info btn-block" to = { this.props.match.url.concat('login_worker')}>
+						¿Cuál es tu rol dentro de tu empresa?
 
-	                    Trabajador
+					</h2>
+					
+					<p className = 'container'>
 
-                  	</Link>
+						<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('work_env_manag_home')}>
 
-				</p>
+							Encargado de clima laboral
+								
+						</Link>
+
+					</p>
+
+					<p className = 'container'>
+
+						<Link className ="btn btn-info btn-block" to = { this.props.match.url.concat('login_worker')}>
+
+		                    Trabajador
+
+	                  	</Link>
+
+					</p>
+
+				</div>
         
 			</div>
 

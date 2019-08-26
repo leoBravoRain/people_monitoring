@@ -84,13 +84,19 @@ class Worker_Message extends Component {
 						
 				</h4>
 
+				<p className="alert alert-primary" role="alert">
+
+					Con tu información el encargado de clima laboral puede saber con más detalle el estado actual del ambiente laboral. Puedes informarle por ejemplo, alguna experiencia negativa/positiva con algún compañero o jefe del área.
+
+				</p>
+
 	            <form onSubmit={this.on_submit_message}>
 
 		            <div className="form-group"> 
 
 		                <label> Mensaje: </label>
 
-		                <input  type="text"
+		                <textarea  type="text"
 		                        className="form-control"
 		                        value = {this.state.message}
 		                        onChange={this.handle_change}

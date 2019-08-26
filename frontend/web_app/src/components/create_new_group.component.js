@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 
-// import { BrowserRouter as Link } from "react-router-dom";
-
-// import Control_Risk from "./control_risk_list.component";
+// make request to server
+import axios from 'axios';
 
 class Create_New_Group extends Component {
 
@@ -20,14 +19,68 @@ class Create_New_Group extends Component {
 		}
 
 		this.on_submit = this.on_submit.bind(this);
+		this.on_change_input_name = this.on_change_input_name.bind(this);
+		this.on_change_input_password = this.on_change_input_password.bind(this);
+
 
 	};
 
-	on_submit() {
+	on_submit(event) {
 
 		// console.log(this);
 
-		this.props.history.push('/work_env_manag_home/dashboard_group/');
+		// prevent default
+		event.preventDefault();
+		
+		// build body for post request
+		const group = {
+
+			name: this.state.name,
+			password: this.state.password,
+
+		};
+
+		// post request
+        axios.post('http://192.168.1.9:4000/people_monitoring/add_group/', group)
+
+        	// if ok
+            .then(response => {
+
+            	const group = response.data;
+            	// console.log(response.data);
+
+        		// console.log('Submit');
+        		window.confirm("¡La empresa ha sido creada exitosamente!");
+
+        		// // redirect to other path
+        		const url = '/work_env_manag_home/dashboard_group/';
+        		this.props.history.push(url.concat(group._id, '/', group.name + '/'));
+
+            })
+
+            // if error
+            .catch(function (error){
+
+            	// user message
+            	window.confirm('Ups, tuvimos un problema, ¡vuelve a intentarlo mas tarde!');
+            	// dislpay error in console
+                console.log(error);
+
+            });
+
+		// this.props.history.push('/work_env_manag_home/dashboard_group/');
+
+	};
+
+	on_change_input_name(event) {
+
+		this.setState({name : event.target.value})
+
+	};
+	
+	on_change_input_password(event) {
+
+		this.setState({password : event.target.value})
 
 	};
 	
@@ -45,6 +98,12 @@ class Create_New_Group extends Component {
 
 				</h2>
 
+				<div className="alert alert-danger" role="alert">
+
+					Recuerda la contraseña que ingresaste, ya que debes escribirla cada vez que quieras ingresar al perfil de tu empresa
+
+				</div>
+
 				<form onSubmit={this.on_submit}>
 
 		            <div className="form-group"> 
@@ -53,8 +112,8 @@ class Create_New_Group extends Component {
 
 		                <input  type="text"
 		                        className="form-control"
-		                        value={this.state.todo_description}
-		                        onChange={this.onChangeTodoDescription}
+		                        value={this.state.name}
+		                        onChange={this.on_change_input_name}
 	                    />
 
 		            </div>
@@ -64,10 +123,10 @@ class Create_New_Group extends Component {
 		                <label> Contraseña: </label>
 
 		                <input 
-		                        type="text" 
+		                        type="password" 
 		                        className="form-control"
-		                        value={this.state.todo_responsible}
-		                        onChange={this.onChangeTodoResponsible}
+		                        value={this.state.password}
+		                        onChange={this.on_change_input_password}
 	                    />
 
 		            </div>

@@ -12,25 +12,51 @@ class Work_Environment_Manager_Home extends Component {
 
 			<div className = 'container'>
 
-				<p className = 'container'>
+				<h2>
 
-					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/create_new_group')}>
+					¿Qué quieres hacer?
 
-						Crear nueva empresa para monitorear
-							
-					</Link>
+				</h2>
 
-				</p>
+				<div className="alert alert-primary" role="alert">
 
-				<p className = 'container'>
+					<p>
 
-					<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/login_to_group')}>
+						Si es que no tienes tu empresa registrada en la plataforma, entonces primero debes crearla presionando el siguiente botón
 
-	                    Ver empresa
+					</p>
 
-                  	</Link>
+					<p className = 'container'>
 
-				</p>
+						<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/create_new_group')}>
+
+							Crear nueva empresa para monitorear
+								
+						</Link>
+
+					</p>
+
+				</div>
+
+				<div className="alert alert-primary" role="alert">
+
+					<p>
+
+						Si es que ya tienes tu empresa registrada en la plataforma, presiona el siguiente botón
+
+					</p>
+					
+					<p className = 'container'>
+
+						<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('/login_to_group')}>
+
+		                    Ver empresa
+
+	                  	</Link>
+
+					</p>
+
+				</div>
         
 			</div>
 

@@ -65,18 +65,24 @@ class Dashboard_Areas extends Component {
 
 			area_name: this.props.match.params.area_name,
 			messages: [],
-			actions: actions,
+			actions: [],
 			data: {},
+			get_data: false,
+			get_actions: false,
 		}
 
 		this.create_action_button = this.create_action_button.bind(this);
 		this.get_data_from_API = this.get_data_from_API.bind(this);
+		this.get_messages_from_worker = this.get_messages_from_worker.bind(this);
+		// this.create_new_aciton = this.create_new_aciton.bind(this);
 
 	};
 
 	create_action_button() {
 
-		this.props.history.push('/work_env_manag_home/create_new_area/');
+		// console.log('click')
+		const url = '/work_env_manag_home/dashboard_group/';
+		this.props.history.push(url.concat(this.props.match.params.group_id, '/', this.props.match.params.group_name, '/dashboard_area/', this.props.match.params.area_id, '/', this.props.match.params.area_name, '/create_new_manager_action'));
 
 	};
 
@@ -84,7 +90,7 @@ class Dashboard_Areas extends Component {
 	get_data_from_API() {
 
 		// get request for get data
-        axios.get('http://192.168.1.9:4000/people_monitoring//daily_question/' + this.props.match.params.area_id)
+        axios.get('http://192.168.1.9:4000/people_monitoring/daily_question/' + this.props.match.params.area_id)
 
         	// if ok
             .then(response => {
@@ -136,6 +142,40 @@ class Dashboard_Areas extends Component {
             	this.setState({
 
             		data: data_,
+            		get_data: true,
+
+            	});
+
+            	console.log(this.state.data.labels.length);
+
+            })
+
+            // if error
+            .catch(function (error){
+
+            	window.confirm('Ups, tuvimos un error, ¡Vuelve a intentarlo mas tarde!');
+            	// dislpay error in console
+                console.log(error);
+
+            });
+
+	};
+
+	get_actions_from_API(){
+
+		// get request for get data
+        axios.get('http://192.168.1.9:4000/people_monitoring/action_of_manager/' + this.props.match.params.area_id)
+
+        	// if ok
+            .then(response => {
+
+            	console.log(response);
+
+            	// update state
+            	this.setState({
+
+            		actions: response.data,
+            		get_actions: true,
 
             	});
 
@@ -152,8 +192,7 @@ class Dashboard_Areas extends Component {
 
 	};
 
-	// life cycle of component
-	componentDidMount() {
+	get_messages_from_worker() {
 
 		// get request for messages from users
         axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)
@@ -183,12 +222,51 @@ class Dashboard_Areas extends Component {
                 console.log(error);
 
             });
+
+	}
+
+	// life cycle of component
+	componentDidMount() {
+
+		// // get request for messages from users
+  //       axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)
+
+  //       	// if ok
+  //           .then(response => {
+
+  //           	// get data from API
+  //           	const messages = response.data;
+
+  //           	// console.log(messages);
+
+  //           	// update state
+  //           	this.setState({
+
+  //           		messages: messages,
+
+  //           	});
+
+  //           })
+
+  //           // if error
+  //           .catch(function (error){
+
+  //           	window.confirm('Ups, tuvimos un error, ¡Vuelve a intentarlo mas tarde!');
+  //           	// dislpay error in console
+  //               console.log(error);
+
+  //           });
 		
 		// get initial data
 		this.get_data_from_API();
+		this.get_messages_from_worker();
 
 		// update data each (last_argument) milisecons
 		setInterval(this.get_data_from_API, 10000);
+		setInterval(this.get_messages_from_worker, 10000);
+
+		// get actions
+		this.get_actions_from_API();
 
 	};
 
@@ -207,17 +285,33 @@ class Dashboard_Areas extends Component {
 
 				</h1>
 
-				<h2>
+				<div className="alert alert-primary" role="alert">
 
-					Link: 
+					<p>
 
-				</h2>
+						Debes enviarles el LINK del área a los trabajadores del área para que ellos puedan calificar el área y enviarte mensajes.
 
-				<p>
+					</p>
 
-					{this.props.match.params.area_id}
+					<h2>
 
-				</p>
+						Link del área:
+
+					</h2>
+
+					<div className="alert alert-success" role="alert">
+
+						{'http://192.168.1.9:3000/dashboard_worker/' + this.props.match.params.area_id + '/' + this.props.match.params.area_name}
+
+					</div>
+
+					<div className ="alert alert-success" role="alert">
+
+						Este LINK debes compartirlo con los trabajadores del área
+
+					</div>
+
+				</div>
 
 				<div className = 'container'>
 
@@ -226,6 +320,22 @@ class Dashboard_Areas extends Component {
 						Monitoreo de estado anímico
 
 					</h3>
+
+					{this.state.get_data && this.state.data.labels.length > 0 
+
+						? 
+
+							null 
+
+						: 
+
+						<div className="alert alert-danger" role="alert">
+
+							Los trabajadores aún no ingresan calificaciones
+
+						</div>
+
+					}
 
 					<Line data={this.state.data} />
 
@@ -238,6 +348,32 @@ class Dashboard_Areas extends Component {
 						Mensajes de trabajadores del área
 
 					</h3>
+
+					<div className="alert alert-primary" role="alert">
+
+						Recuerda que los mensajes enviados por los trabajadores son totalmente anónimos
+
+					</div>
+
+					<div> 
+
+						{this.state.messages.length > 0
+
+							?
+
+								null
+
+							:
+
+								<div className="alert alert-danger" role="alert">
+
+									Los trabajadores aún no te envían mensajes
+
+								</div>
+
+						}
+
+					</div>
 					
 					<div className = 'table table-responsive'>
 
@@ -249,7 +385,7 @@ class Dashboard_Areas extends Component {
 
 									<th> 
 
-										Numero
+										Número
 
 									</th>
 
@@ -298,9 +434,31 @@ class Dashboard_Areas extends Component {
 
 					</h3>
 
+					<div className="alert alert-primary" role="alert">
+
+						Acá puedes registrar las acciones correctivas que vayas realizando, de tal forma de gestionar y analizar si es que influyen en el estado anímico del área
+						
+					</div>
+
+					{this.state.get_actions && this.state.actions.length > 0 
+
+						? 
+
+							null 
+
+						: 
+
+						<div className="alert alert-danger" role="alert">
+
+							Aún no registras acciones
+
+						</div>
+
+					}
+
 					<p>
 
-						<button type="button" className ="btn btn-primary"> 
+						<button type="button" className ="btn btn-primary" onClick = {this.create_action_button}> 
 
 							Agregar acción 
 
@@ -318,7 +476,7 @@ class Dashboard_Areas extends Component {
 
 									<th> 
 
-										Numero
+										Número
 
 									</th>
 
@@ -346,7 +504,7 @@ class Dashboard_Areas extends Component {
 
 										<td> {idx + 1} </td>
 										<td> {action.date} </td>
-										<td> {action.action} </td>
+										<td> {action.description} </td>
 
 									</tr>
 								)}

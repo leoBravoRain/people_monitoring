@@ -71,6 +71,12 @@ class Daily_Question extends Component {
 						
 				</h4>
 
+				<p className="alert alert-primary" role="alert">
+
+	            	Con esta información, el encargado puede saber el estado de ánimo actual de toda el área, pudiendo mejorar la situación actual del ambiente laboral de tu área
+
+	            </p>
+
 
 				<div className = 'container'>
 
@@ -80,7 +86,7 @@ class Daily_Question extends Component {
 
 					</div>
 		                
-	                <div className = 'container'>
+	                <p className = 'container'>
 
 		                <button onClick = {() => this.on_submit(-1)} type="button" className ="btn btn-danger btn-block"> 
 
@@ -100,7 +106,7 @@ class Daily_Question extends Component {
 
 						</button>
 
-					</div>
+					</p>
 
 	            </div>
 
