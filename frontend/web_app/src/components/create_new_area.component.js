@@ -5,7 +5,8 @@ import React, { Component } from "react";
 // import Control_Risk from "./control_risk_list.component";
 
 // make request to server
-import axios from 'axios';
+// import axios from 'axios';
+import {fs} from "../config/firebase";
 
 class Create_New_Area extends Component {
 
@@ -40,7 +41,8 @@ class Create_New_Area extends Component {
 		};
 
 		// post request
-        axios.post('http://192.168.1.9:4000/people_monitoring/add_area/', area)
+        // axios.post('http://192.168.1.9:4000/people_monitoring/add_area/', area)
+        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').add(area)
 
         	// if ok
             .then(response => {

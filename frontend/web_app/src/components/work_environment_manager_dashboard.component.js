@@ -4,7 +4,8 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 
 // import Control_Risk from "./control_risk_list.component";
 // make request to server
-import axios from 'axios';
+// import axios from 'axios';
+import {fs} from "../config/firebase";
 
 // // fake data
 // var areas = [
@@ -50,13 +51,29 @@ class Home extends Component {
 	componentDidMount() {
 
 		// get request for get data
-        axios.get('http://192.168.1.9:4000/people_monitoring/areas/' + this.props.match.params.group_id)
+        // axios.get('http://192.168.1.9:4000/people_monitoring/areas/' + this.props.match.params.group_id)
+        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').get().then( snapshotquery => {
 
         	// if ok
-            .then(response => {
+            // .then(response => {
+
+            	let areas = [];
 
             	// get data from API
-            	const areas = response.data;
+            	// const areas = response.data;
+
+        	    // iterate over each item
+        	    snapshotquery.forEach(doc => {
+
+        	    	// console.log(doc.data());
+        	    	let area = doc.data();
+        	    	// post['doc_id'] = doc.id;
+        	    	// post['image'] = "https://www.oreilly.com/library/view/deep-learning/9781491924570/assets/dpln_0201.png";
+        			// add item to array
+        			// posts.push(doc.data());
+        			areas.push(area);
+
+        	    });
 
             	// update state
             	this.setState({

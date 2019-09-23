@@ -3,6 +3,8 @@ import React, { Component } from "react";
 // make request to server
 import axios from 'axios';
 
+import {fs} from "../config/firebase";
+
 class Create_New_Group extends Component {
 
 	// constructor
@@ -41,20 +43,21 @@ class Create_New_Group extends Component {
 		};
 
 		// post request
-        axios.post('http://192.168.1.9:4000/people_monitoring/add_group/', group)
-
+        // axios.post('http://192.168.1.9:4000/people_monitoring/add_group/', group)
+        fs.collection('groups').add(group)
         	// if ok
-            .then(response => {
+            .then(ref => {
 
-            	const group = response.data;
-            	// console.log(response.data);
+            	// const group = ref.data;
+            	// console.log("group added in: ", ref.id);
+            	// console.log(ref.data);
 
         		// console.log('Submit');
         		window.confirm("¡La empresa ha sido creada exitosamente!");
 
         		// // redirect to other path
         		const url = '/work_env_manag_home/dashboard_group/';
-        		this.props.history.push(url.concat(group._id, '/', group.name + '/'));
+        		this.props.history.push(url.concat(ref.id, '/', group.name + '/'));
 
             })
 
@@ -86,7 +89,7 @@ class Create_New_Group extends Component {
 	
 	render() {
 
-		console.log(this);
+		// console.log(this);
 
 		return(
 
