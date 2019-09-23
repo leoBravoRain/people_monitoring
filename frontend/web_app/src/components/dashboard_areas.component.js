@@ -5,7 +5,7 @@ import { BrowserRouter as Link } from "react-router-dom";
 import {Line} from 'react-chartjs-2';
 // make request to server
 import axios from 'axios';
-
+import {fs} from "../config/firebase";
 // fake data
 // var messages = [
 
@@ -22,34 +22,6 @@ var actions = [
 	{date: '25-03-2019', action: 'Se envía a jefe directo a couching para mejorar trato con colaboradores'}
 
 ]
-
-// // fake data
-// const data = {
-//   labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
-//   datasets: [
-//     {
-//       label: 'Estado de animo del area',
-//       fill: false,
-//       lineTension: 0.1,
-//       backgroundColor: 'rgba(75,192,192,0.4)',
-//       borderColor: 'rgba(75,192,192,1)',
-//       borderCapStyle: 'butt',
-//       borderDash: [],
-//       borderDashOffset: 0.0,
-//       borderJoinStyle: 'miter',
-//       pointBorderColor: 'rgba(75,192,192,1)',
-//       pointBackgroundColor: '#fff',
-//       pointBorderWidth: 1,
-//       pointHoverRadius: 5,
-//       pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-//       pointHoverBorderColor: 'rgba(220,220,220,1)',
-//       pointHoverBorderWidth: 2,
-//       pointRadius: 1,
-//       pointHitRadius: 10,
-//       data: [-0.9, -0.9, -0.5, -0.1, 0, 0.1, 0.3, 0.1, 0.5, 0.8, 0.5, 0.8]
-//     }
-//   ]
-// };
 
 // componentn itself
 class Dashboard_Areas extends Component {
@@ -80,7 +52,6 @@ class Dashboard_Areas extends Component {
 
 	create_action_button() {
 
-		// console.log('click')
 		const url = '/work_env_manag_home/dashboard_group/';
 		this.props.history.push(url.concat(this.props.match.params.group_id, '/', this.props.match.params.group_name, '/dashboard_area/', this.props.match.params.area_id, '/', this.props.match.params.area_name, '/create_new_manager_action'));
 
@@ -89,31 +60,28 @@ class Dashboard_Areas extends Component {
 	// get data from API
 	get_data_from_API() {
 
+		console.log("hi");
+
 		// get request for get data
-        axios.get('http://192.168.1.9:4000/people_monitoring/daily_question/' + this.props.match.params.area_id)
-
-        	// if ok
-            .then(response => {
-
-            	// get data from API
-            	const califications = response.data;
+        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("califications").get().then( snapshotquery => {
 
             	// data structure for chart data
             	const data = [];
             	const labels = [];
 
-            	// console.log(califications);
-            	califications.map( function(currentValue, index, arr) {
+    		    // iterate over each item
+    		    snapshotquery.forEach(doc => {
 
             		// get data
-            		data.push(currentValue.calification);
-            		labels.push(currentValue.date);
+            		data.push(doc.data().calification);
+            		labels.push(doc.data().date);
 
-            	});
+    		    });
 
             	// data sctructure
         		const data_ = {};
         		data_['labels'] = labels;
+
         		// temporal variable
         		var tmp = {
         				label: 'Estado de animo del area',
@@ -146,7 +114,7 @@ class Dashboard_Areas extends Component {
 
             	});
 
-            	console.log(this.state.data.labels.length);
+            	// console.log(this.state.data.labels.length);
 
             })
 
@@ -195,15 +163,25 @@ class Dashboard_Areas extends Component {
 	get_messages_from_worker() {
 
 		// get request for messages from users
-        axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)
-
-        	// if ok
-            .then(response => {
+        // axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)
+        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("messages_from_workers").get().then( snapshotquery => {
 
             	// get data from API
-            	const messages = response.data;
+            	// const messages = response.data;
+            	let messages = [];
 
-            	// console.log(messages);
+			    // iterate over each item
+			    snapshotquery.forEach(doc => {
+
+	        		// get data
+	        		const message = {
+	        			message: doc.data().message,
+	        			date: doc.data().date.toDate().toString()
+	        		}
+
+	        		messages.push(message);
+
+			    });
 
             	// update state
             	this.setState({
@@ -266,7 +244,7 @@ class Dashboard_Areas extends Component {
 		setInterval(this.get_messages_from_worker, 10000);
 
 		// get actions
-		this.get_actions_from_API();
+		// this.get_actions_from_API();
 
 	};
 

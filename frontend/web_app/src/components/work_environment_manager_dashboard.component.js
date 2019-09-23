@@ -71,6 +71,7 @@ class Home extends Component {
         	    	// post['image'] = "https://www.oreilly.com/library/view/deep-learning/9781491924570/assets/dpln_0201.png";
         			// add item to array
         			// posts.push(doc.data());
+        			area["_id"] = doc.id;
         			areas.push(area);
 
         	    });

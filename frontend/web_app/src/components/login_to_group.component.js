@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 // make request to server
 import axios from 'axios';
+// import {fs} from "../config/firebase";
 // import { BrowserRouter as Link } from "react-router-dom";
 
 // import Control_Risk from "./control_risk_list.component";
@@ -38,6 +39,7 @@ class Login_to_Group extends Component {
 
 		// get request for get data
         axios.get('http://192.168.1.9:4000/people_monitoring/group/' + this.state.group_id + '/' + this.state.password)
+        // fs.collection('groups').doc(this.state.group_id).collection('areas').get().then( snapshotquery => {
 
         	// if ok
             .then(response => {
