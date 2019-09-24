@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 // make request to server
 import axios from 'axios';
-// import {fs} from "../config/firebase";
+import {fs} from "../config/firebase";
 // import { BrowserRouter as Link } from "react-router-dom";
 
 // import Control_Risk from "./control_risk_list.component";
@@ -38,29 +38,53 @@ class Login_to_Group extends Component {
 		// this.props.history.push('/work_env_manag_home/dashboard_group/');
 
 		// get request for get data
-        axios.get('http://192.168.1.9:4000/people_monitoring/group/' + this.state.group_id + '/' + this.state.password)
-        // fs.collection('groups').doc(this.state.group_id).collection('areas').get().then( snapshotquery => {
+        // axios.get('http://192.168.1.9:4000/people_monitoring/group/' + this.state.group_id + '/' + this.state.password)
+        fs.collection('groups').doc(this.state.group_id).get().then( doc => {
 
-        	// if ok
-            .then(response => {
+        	// // if ok
+         //    .then(response => {
+         	console.log(doc);
 
-            	// get data from API
-            	const group = response.data;
+			// if doc exist
+			if(doc.exists) {
 
-            	// console.log(group);
+				// check password
+				if(doc.data().password == this.state.password){
 
-            	// if response of server contain the group (response can be 0 or 1 of lenght)
-            	if(group.length > 0) {
+					this.props.history.push('/work_env_manag_home/dashboard_group/' + this.state.group_id + '/' + doc.data().name + '/');
 
-            		this.props.history.push('/work_env_manag_home/dashboard_group/' + this.state.group_id + '/' + group[0].name + '/');
+				}
 
-            	}
+				else {
 
-            	else {
+					window.confirm('Ups, al parecer la contraseña no es correcta ¡Verificala!');
 
-            		window.confirm('Ups, al parecer los ingresados no son correctos ¡Verifica que sean correctos!');
+				}
 
-            	}
+			} 
+
+			else {
+
+				window.confirm('Ups, al parecer los ingresados no son correctos ¡Verifica que sean correctos!');
+
+			}
+            	// // get data from API
+            	// const group = response.data;
+
+            	// // console.log(group);
+
+            	// // if response of server contain the group (response can be 0 or 1 of lenght)
+            	// if(group.length > 0) {
+
+            	// 	this.props.history.push('/work_env_manag_home/dashboard_group/' + this.state.group_id + '/' + group[0].name + '/');
+
+            	// }
+
+            	// else {
+
+            	// 	window.confirm('Ups, al parecer los ingresados no son correctos ¡Verifica que sean correctos!');
+
+            	// }
 
 
             })
