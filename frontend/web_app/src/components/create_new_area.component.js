@@ -33,15 +33,25 @@ class Create_New_Area extends Component {
 		// prevent default
 		event.preventDefault();
 		
+
+		// post request
+        // // axios.post('http://192.168.1.9:4000/people_monitoring/add_area/', area)
+        // const ref = fs.collection('groups').doc(this.props.match.params.group_id).collection('areas');
+        // const a_doc = ref.doc();
+
+        // console.log(fs.createId());
+
 		// build body for post request
 		const area = {
 
 			name: this.state.name,
 			group: this.props.match.params.group_id,
+			// id: a_doc.id,
+
 		};
 
-		// post request
-        // axios.post('http://192.168.1.9:4000/people_monitoring/add_area/', area)
+
+		// ref.add(area)
         fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').add(area)
 
         	// if ok

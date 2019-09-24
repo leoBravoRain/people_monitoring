@@ -42,8 +42,8 @@ class Login_to_Group extends Component {
         fs.collection('groups').doc(this.state.group_id).get().then( doc => {
 
         	// // if ok
-         //    .then(response => {
-         	console.log(doc);
+            // .then(response => {
+         	// console.log(doc);
 
 			// if doc exist
 			if(doc.exists) {
