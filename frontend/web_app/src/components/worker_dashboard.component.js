@@ -32,13 +32,13 @@ class Dashboard_Worker extends Component {
 
 					<div class="alert alert-success" role="alert">
 
-						<Daily_Question area_id = {this.props.match.params.area_id}/>
+						<Daily_Question group_id = {this.props.match.params.group_id} area_id = {this.props.match.params.area_id}/>
 
 					</div>
 
 					<div class="alert alert-success" role="alert">
 
-						<Worker_Message area_id = {this.props.match.params.area_id}/>
+						<Worker_Message group_id = {this.props.match.params.group_id} area_id = {this.props.match.params.area_id}/>
 
 					</div>
 					

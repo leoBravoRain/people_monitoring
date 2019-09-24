@@ -5,7 +5,10 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 // import Control_Risk from "./control_risk_list.component";
 
 // make request to server
-import axios from 'axios';
+// import axios from 'axios';
+import {fs} from "../config/firebase";
+// import firebase from "firebase";
+// import "firebase/firestore";
 
 class Daily_Question extends Component {
 
@@ -29,15 +32,27 @@ class Daily_Question extends Component {
 	// on submit function
 	on_submit(calification) {
 
+		// get current date
+		var currentdate = new Date(); 
+		var datetime =  currentdate.getDate() + "/"
+		                + (currentdate.getMonth()+1)  + "/" 
+		                + currentdate.getFullYear() + " "  
+		                + currentdate.getHours() + ":"  
+		                + currentdate.getMinutes() + ":" 
+		                + currentdate.getSeconds()
+
 		// build body for post request
 		const calification_ = {
 
 			calification: calification,
 			area: this.props.area_id,
+			date: datetime
 		};
 
 		// post request
-        axios.post('http://192.168.1.9:4000/people_monitoring/add_daily_question/', calification_)
+        // axios.post('http://192.168.1.9:4000/people_monitoring/add_daily_question/', calification_)
+        // fs.collection('groups').doc(this.props.group_id).collection('areas').doc(this.props.area_id).collection("califications").add(calification_)
+        fs.collection('groups').doc(this.props.group_id).collection('areas').doc(this.props.area_id).collection("califications").add(calification_)
 
         	// if ok
             .then(response => {

@@ -4,6 +4,7 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 
 // make request to server
 import axios from 'axios';
+import {fs} from "../config/firebase";
 
 class Worker_Message extends Component {
 
@@ -42,15 +43,26 @@ class Worker_Message extends Component {
 		// prevent default
 		event.preventDefault();
 		
+		// get current date
+		var currentdate = new Date(); 
+		var datetime =  currentdate.getDate() + "/"
+		                + (currentdate.getMonth()+1)  + "/" 
+		                + currentdate.getFullYear() + " "  
+		                + currentdate.getHours() + ":"  
+		                + currentdate.getMinutes() + ":" 
+		                + currentdate.getSeconds()
+
 		// build body for post request
 		const message_ = {
 
 			message: this.state.message,
 			area: this.props.area_id,
+			date: datetime,
 		};
 
 		// post request
-        axios.post('http://192.168.1.9:4000/people_monitoring/add_message_from_worker/', message_)
+        // axios.post('http://192.168.1.9:4000/people_monitoring/add_message_from_worker/', message_)
+        fs.collection('groups').doc(this.props.group_id).collection('areas').doc(this.props.area_id).collection("messages_from_workers").add(message_)
 
         	// if ok
             .then(response => {

@@ -46,6 +46,7 @@ class Create_New_Area extends Component {
 
 			name: this.state.name,
 			group: this.props.match.params.group_id,
+			// date: fs.ServerValue.TIMESTAMP
 			// id: a_doc.id,
 
 		};

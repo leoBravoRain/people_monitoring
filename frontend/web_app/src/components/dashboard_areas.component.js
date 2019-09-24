@@ -192,7 +192,8 @@ class Dashboard_Areas extends Component {
 	        		// get data
 	        		const message = {
 	        			message: doc.data().message,
-	        			date: doc.data().date.toDate().toString()
+	        			// date: doc.data().date.toDate().toString()
+	        			date: doc.data().date,
 	        		}
 
 	        		messages.push(message);

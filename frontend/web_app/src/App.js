@@ -82,7 +82,7 @@ class App extends Component {
         <Route path = '/login_worker/' exact component = {Login_Worker} />
 
       {/* dashboard worker*/}
-        <Route path = '/dashboard_worker/:area_id/:area_name' exact component = {Dashboard_Worker} />
+        <Route path = '/dashboard_worker/:group_id/:area_id/:area_name' exact component = {Dashboard_Worker} />
 
       </Router>
 

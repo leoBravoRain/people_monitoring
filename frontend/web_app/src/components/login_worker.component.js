@@ -36,36 +36,9 @@ class Login_Worker extends Component {
 		// prevent fomr reload page automatically
 		event.preventDefault();
 
-		// console.log(this);
-
-		// this.props.history.push('/work_env_manag_home/dashboard_group/');
-
 		// get request for get data
 		// axios.get('http://192.168.1.9:4000/people_monitoring/area/' + this.state.area_id + '/')
         fs.collection('groups').doc(this.state.group_id).collection("areas").doc(this.state.area_id).get().then( doc => {
-        // fs.collectionGroup("areas").where("id", "==", this.state.area_id).get().then (snapshotquery => {
-
-        // then( snapshotquery => {
-
-            	// // data structure for chart data
-            	// const data = [];
-            	// const labels = [];
-
-		    // // iterate over each item
-		    // snapshotquery.forEach(doc => {
-
-		    // 	console.log(doc);
-
-      //   		// get data
-      //   		// data.push(doc.data().calification);
-      //   		// labels.push(doc.data().date);
-
-		    // });
-
-
-        	// if ok
-            // .then(response => {
-         	console.log(doc);
 
 			// if doc exist
 			if(doc.exists) {
@@ -74,8 +47,8 @@ class Login_Worker extends Component {
 				if(doc.data().password == this.state.password){
 
 					console.log("data correct!");
-					
-					this.props.history.push('/dashboard_worker/' + this.state.area_id + '/' + doc.data().name);
+
+					this.props.history.push('/dashboard_worker/' + this.state.group_id + "/" + this.state.area_id + '/' + doc.data().name);
 
 				}
 
@@ -92,24 +65,6 @@ class Login_Worker extends Component {
 				window.confirm('Ups, al parecer los ingresados no son correctos ¡Verifica que sean correctos!');
 
 			}
-            	// // get data from API
-            	// const group = response.data;
-
-            	// // console.log(group);
-
-            	// // if response of server contain the group (response can be 0 or 1 of lenght)
-            	// if(group.length > 0) {
-
-            	// 	this.props.history.push('/work_env_manag_home/dashboard_group/' + this.state.group_id + '/' + group[0].name + '/');
-
-            	// }
-
-            	// else {
-
-            	// 	window.confirm('Ups, al parecer los ingresados no son correctos ¡Verifica que sean correctos!');
-
-            	// }
-
 
             })
 
@@ -123,29 +78,6 @@ class Login_Worker extends Component {
                 console.log(error);
 
             });
-
-        // axios.get('http://192.168.1.9:4000/people_monitoring/area/' + this.state.area_id + '/')
-
-        // 	// if ok
-        //     .then(response => {
-
-        //     	// get data from API
-        //     	var area = response.data;
-
-        //     	// console.log(area);
-
-        //     	this.props.history.push('/dashboard_worker/' + this.state.area_id + '/' + area.name);
-
-        //     })
-
-        //     // if error
-        //     .catch(function (error){
-
-        //     	window.confirm('Ups, al parecer el área ingresada no es correcta ¡Verifica que sea correcta!');
-        //     	// dislpay error in console
-        //         console.log(error);
-
-        //     });
 
 	};
 
@@ -161,12 +93,6 @@ class Login_Worker extends Component {
 
 	};
 	
-	// on_change_input_password(event) {
-
-	// 	this.setState({password : event.target.value})
-
-	// };
-
 	render() {
 
 		return(
