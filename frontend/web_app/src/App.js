@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import {auth} from "./config/firebase";
+
 import Home from "./components/home.component";
 import Work_Environment_Manager_Home from "./components/work_environment_manager_home.component";
 import Create_New_Group from './components/create_new_group.component';
@@ -17,9 +19,42 @@ import Dashboard_Worker from './components/worker_dashboard.component';
 import Login_Worker from './components/login_worker.component';
 import Login_to_Group from './components/login_to_group.component';
 import Manager_Action from './components/create_new_action_of_manager.component'
+import Manager_Login from "./screens/login_manager.screen";
+
 
 // Component 
 class App extends Component {
+
+  // constructor
+  constructor(props) {
+
+    // constructur of parent
+    super(props);
+
+    this.on_logout = this.on_logout.bind(this);
+
+  };
+
+  on_logout() {
+
+    // logout
+    auth.signOut().then(res => {
+
+      // console.log("loogut");
+      // console.log(this);
+
+      // window.redirect(window.location.host)
+      // window.location = "/";
+      // this.props.history.push('');
+
+    }).catch(error => {
+
+      console.log(error);
+
+    });
+ 
+
+  }
 
   // render method
   render() {
@@ -52,6 +87,18 @@ class App extends Component {
                  
                 </li>
 
+                <li className="navbar-item">
+
+                  <p className="nav-link" onClick = {this.on_logout}>
+
+                    Cerrar sesión
+
+                  </p>
+
+                </li>
+
+
+
               </ul>
 
             </div>
@@ -63,6 +110,9 @@ class App extends Component {
         {/* Home */}
         <Route path = '/' exact component = {Home} />
 
+        {/* manager login */}
+        <Route path = "/work_env_manag_login/" exact component = {Manager_Login} />
+        
         {/* manager home*/}
         <Route path = '/work_env_manag_home/' exact component = {Work_Environment_Manager_Home} />
 

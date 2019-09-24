@@ -5,7 +5,7 @@ import { BrowserRouter as Link } from "react-router-dom";
 import {Line} from 'react-chartjs-2';
 // make request to server
 import axios from 'axios';
-import {fs} from "../config/firebase";
+import {fs, auth} from "../config/firebase";
 // fake data
 // var messages = [
 
@@ -59,8 +59,6 @@ class Dashboard_Areas extends Component {
 
 	// get data from API
 	get_data_from_API() {
-
-		console.log("hi");
 
 		// get request for get data
         fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("califications").get().then( snapshotquery => {
@@ -223,6 +221,26 @@ class Dashboard_Areas extends Component {
 	// life cycle of component
 	componentDidMount() {
 
+		// check if user is logged
+		auth.onAuthStateChanged((user) => {
+
+		    if (user) {
+
+		      console.log("user logged");
+
+		      // this.props.history.push('/work_env_manag_home/');
+
+		    } 
+
+		    else {
+
+		    	console.log("user not logged");
+
+		    	this.props.history.push('/work_env_manag_login/');
+		    }
+
+		  });
+
 		// // get request for messages from users
   //       axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)
 
@@ -296,7 +314,7 @@ class Dashboard_Areas extends Component {
 
 					<div className="alert alert-success" role="alert">
 
-						{'http://192.168.1.9:3000/dashboard_worker/' + this.props.match.params.area_id + '/' + this.props.match.params.area_name}
+						{ window.location.host + '/dashboard_worker/' + this.props.match.params.group_id + "/" + this.props.match.params.area_id + '/' + this.props.match.params.area_name}
 
 					</div>
 

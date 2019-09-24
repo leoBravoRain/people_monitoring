@@ -30,7 +30,7 @@ class Work_Env_Manager_Dashboard extends Component {
 					
 					<p className = 'container'>
 
-						<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('work_env_manag_home')}>
+						<Link className ="btn btn-primary btn-block" to = { this.props.match.url.concat('work_env_manag_login')}>
 
 							Encargado de clima laboral
 								

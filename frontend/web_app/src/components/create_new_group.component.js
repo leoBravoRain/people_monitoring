@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // make request to server
 import axios from 'axios';
 
-import {fs} from "../config/firebase";
+import {fs, auth} from "../config/firebase";
 
 class Create_New_Group extends Component {
 
@@ -26,6 +26,28 @@ class Create_New_Group extends Component {
 
 
 	};
+
+	componentDidMount() {
+
+		auth.onAuthStateChanged((user) => {
+
+		    if (user) {
+
+		      console.log("user logged");
+
+		      // this.props.history.push('/work_env_manag_home/');
+
+		    } 
+
+		    else {
+
+		    	console.log("user not logged");
+
+		    	this.props.history.push('/work_env_manag_login/');
+		    }
+
+		  });
+	}
 
 	on_submit(event) {
 

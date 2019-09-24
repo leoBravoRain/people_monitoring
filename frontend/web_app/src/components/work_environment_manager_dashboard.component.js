@@ -5,7 +5,7 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 // import Control_Risk from "./control_risk_list.component";
 // make request to server
 // import axios from 'axios';
-import {fs} from "../config/firebase";
+import {fs, auth} from "../config/firebase";
 
 // // fake data
 // var areas = [
@@ -49,6 +49,27 @@ class Home extends Component {
 	};
 
 	componentDidMount() {
+
+		// check login
+		auth.onAuthStateChanged((user) => {
+
+		    if (user) {
+
+		      console.log("user logged");
+
+		      // this.props.history.push('/work_env_manag_home/');
+
+		    } 
+
+		    else {
+
+		    	console.log("user not logged");
+
+		    	this.props.history.push('/work_env_manag_login/');
+		    }
+
+	  	});
+
 
 		// get request for get data
         // axios.get('http://192.168.1.9:4000/people_monitoring/areas/' + this.props.match.params.group_id)
