@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Route, Link } from "react-router-dom";
 
 // make request to server
-import axios from 'axios';
+// import axios from 'axios';
 import {fs} from "../config/firebase";
 
 class Worker_Message extends Component {

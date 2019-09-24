@@ -133,9 +133,6 @@ class Dashboard_Areas extends Component {
         // axios.get('http://192.168.1.9:4000/people_monitoring/action_of_manager/' + this.props.match.params.area_id)
         fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("actions_of_manager").get().then( snapshotquery => {
 
-        	// // if ok
-         //    .then(response => {
-
          		let actions = [];
 
  			    // iterate over each item
@@ -144,7 +141,8 @@ class Dashboard_Areas extends Component {
  	        		// get data
  	        		const action = {
  	        			description: doc.data().description,
- 	        			date: doc.data().date.toDate().toString()
+ 	        			// date: doc.data().date.toDate().toString()
+ 	        			date: doc.data().date,
  	        		}
 
  	        		actions.push(action);
@@ -278,7 +276,7 @@ class Dashboard_Areas extends Component {
 		setInterval(this.get_data_from_API, 10000);
 		setInterval(this.get_messages_from_worker, 10000);
 
-		// get actions
+		// // get actions
 		this.get_actions_from_API();
 
 	};
