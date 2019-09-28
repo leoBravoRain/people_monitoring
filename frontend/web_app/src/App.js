@@ -23,7 +23,6 @@ import List_of_Groups from './screens/list_of_groups.screen'
 import Manager_Action from './components/create_new_action_of_manager.component'
 import Manager_Login from "./screens/login_manager.screen";
 
-
 // Component 
 class App extends Component {
 
@@ -55,7 +54,6 @@ class App extends Component {
 
     });
  
-
   }
 
   // render method

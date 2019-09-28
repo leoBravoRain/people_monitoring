@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import {fs} from "../config/firebase";
 import firebase from "firebase";
 
+// google analytics
+import {initGA, Event_GA} from "../config/google_analytics";
+
 class Daily_Question extends Component {
 
 	// constructor
@@ -22,6 +25,13 @@ class Daily_Question extends Component {
 		this.on_submit = this.on_submit.bind(this);
 
 	};
+
+	componentDidMount() {
+
+		// init Google analytics
+		initGA();
+
+	}
 
 	// on submit function
 	on_submit(calification) {
@@ -52,6 +62,9 @@ class Daily_Question extends Component {
         	// if ok
             .then(response => {
 
+				// add event to GA
+				Event_GA("Monitored", "add new daily question anwser", "new daily question answer");
+				
         		// console.log('Submit');
         		window.confirm("¡Gracias por hacernos saber!");
 

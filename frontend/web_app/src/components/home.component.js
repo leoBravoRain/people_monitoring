@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 import { BrowserRouter as Route, Link } from "react-router-dom";
 
-// import Control_Risk from "./control_risk_list.component";
-
 class Work_Env_Manager_Dashboard extends Component {
 
 	render() {

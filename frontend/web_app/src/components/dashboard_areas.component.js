@@ -1,27 +1,11 @@
 import React, { Component } from "react";
 
-import { BrowserRouter as Link } from "react-router-dom";
-
 import {Line} from 'react-chartjs-2';
 // make request to server
-// import axios from 'axios';
 import {fs, auth} from "../config/firebase";
-// fake data
-// var messages = [
 
-// 	{date: '19-03-2019', message: 'Mi jefe directo me grita cada vez que quiere pedirme algo, debería mejorar su trato conmigo'},
-// 		{date: '22-03-2019', message: 'Mi jefe directo es muy prepotente en las reuniones que tenemos'},
-// 		{date: '1-04-2019', message: 'Ha mejorado demasiado el trato de mi jefe, ahora es muy respetuoso conmigo y mis compañeros ¡Gracias por la intervención!'}
-
-// ]
-
-/* // fake data
-var actions = [
-
-	{date: '22-03-2019', action: 'Se conversa con jefe directo para que mejore trato con trabajadores'},
-	{date: '25-03-2019', action: 'Se envía a jefe directo a couching para mejorar trato con colaboradores'}
-
-] */
+// google analytics
+import {initGA, PageView_GA} from "../config/google_analytics";
 
 // componentn itself
 class Dashboard_Areas extends Component {
@@ -153,8 +137,6 @@ class Dashboard_Areas extends Component {
 
  			    });
 
-            	// console.log(response);
-
             	// update state
             	this.setState({
 
@@ -244,6 +226,11 @@ class Dashboard_Areas extends Component {
 		    }
 
 		  });
+
+		//   add GA
+		initGA();
+		// register pageview
+		PageView_GA();
 
 		// // get request for messages from users
   //       axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)

@@ -7,6 +7,9 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 import {fs} from "../config/firebase";
 import firebase from "firebase";
 
+// add google analytics
+import {initGA, Event_GA} from "../config/google_analytics";
+
 class Worker_Message extends Component {
 
 	// constructor
@@ -25,6 +28,12 @@ class Worker_Message extends Component {
 		this.on_submit_message = this.on_submit_message.bind(this);
 		this.handle_change = this.handle_change.bind(this);
 	};
+
+	componentDidMount() {
+
+		initGA();
+		
+	}
 
 	// handle change in input text
 	handle_change(event) {
@@ -69,6 +78,9 @@ class Worker_Message extends Component {
         	// if ok
             .then(response => {
 
+				// add event to GA
+				Event_GA("Monitored", "add new message from monitored", "new monitored message");
+				
         		// console.log('Submit');
         		window.confirm("¡Tu mensaje ha sido enviado correctamente!");
 

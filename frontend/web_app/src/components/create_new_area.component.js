@@ -8,6 +8,9 @@ import React, { Component } from "react";
 // import axios from 'axios';
 import {fs, auth} from "../config/firebase";
 
+// google analytics
+import {initGA, Event_GA} from "../config/google_analytics";
+
 class Create_New_Area extends Component {
 
 	// constructor
@@ -48,7 +51,10 @@ class Create_New_Area extends Component {
 		    	this.props.history.push('/work_env_manag_login/');
 		    }
 
-	  	});
+		  });
+		  
+		//add GA
+		initGA();
 
 	}
 	
@@ -84,6 +90,9 @@ class Create_New_Area extends Component {
 
         		// console.log('Submit');
         		window.confirm("¡El área ha sido creada exitosamente!");
+
+				// add event to GA
+				Event_GA("Area", "create new area", "create area");
 
         		// redirect to other path
         		const url = '/work_env_manag_home/dashboard_group/';

@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import {fs} from "../config/firebase";
 import firebase from "firebase";
 
+// google analytics
+import {initGA, Event_GA} from "../config/google_analytics";
+
 class Manager_Action extends Component {
 
 	// constructor
@@ -35,6 +38,13 @@ class Manager_Action extends Component {
 
 	};
 
+	componentDidMount() {
+
+		// init google analytics
+		initGA();
+		
+	}
+	
 	// on submit form
 	on_submit_action(event) {
 
@@ -73,6 +83,9 @@ class Manager_Action extends Component {
             	// user messsage
         		window.confirm("¡Se ha creado correctamente!");
 
+				// add event to google analutics
+				Event_GA("Manager", "add new action", "new action");
+				
         		// redirect to dashboard
         		const url_base = '/work_env_manag_home/dashboard_group/';
         		const url = url_base.concat(this.props.match.params.group_id, '/', this.props.match.params.group_name, '/dashboard_area/', this.props.match.params.area_id, '/', this.props.match.params.area_name);

@@ -4,6 +4,10 @@ import React, { Component } from "react";
 // import axios from 'axios';
 import {fs, auth} from "../config/firebase";
 
+// google analytics
+import {initGA, Event_GA} from "../config/google_analytics";
+
+
 class Manager_Login extends Component {
 
 	// constructor
@@ -28,6 +32,7 @@ class Manager_Login extends Component {
 
 	componentDidMount() {
 
+		// check if user is logged
 		auth.onAuthStateChanged((user) => {
 
 		    if (user) {
@@ -43,7 +48,11 @@ class Manager_Login extends Component {
 		    	console.log("user not logged");
 		    }
 
-	  	});
+		});
+		  
+		// init GA
+		initGA();
+
 	}
 
 	on_create_user(event) {
@@ -61,6 +70,9 @@ class Manager_Login extends Component {
 		.then(res => {
 
 			// console.log("user created!");
+
+			// add GA event
+			Event_GA("Manager", "new manager registered", "registry");
 
 			this.props.history.push('/work_env_manag_home/');
 
@@ -90,7 +102,8 @@ class Manager_Login extends Component {
 
 			console.log("user logged!");
 
-			console.log(res);
+			// add GA event
+			Event_GA("User", "login user", "login");
 
 			// this.props.history.push(url.concat(this.props.match.params.group_id, '/',this.props.match.params.group_name, '/'));
 

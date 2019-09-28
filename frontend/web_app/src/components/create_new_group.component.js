@@ -5,6 +5,9 @@ import axios from 'axios';
 
 import {fs, auth} from "../config/firebase";
 
+// google analytics
+import {initGA, Event_GA} from "../config/google_analytics";
+
 class Create_New_Group extends Component {
 
 	// constructor
@@ -30,6 +33,7 @@ class Create_New_Group extends Component {
 
 	componentDidMount() {
 
+		// check if user is logged
 		auth.onAuthStateChanged((user) => {
 
 		    if (user) {
@@ -54,6 +58,10 @@ class Create_New_Group extends Component {
 		    }
 
 		  });
+
+		// add google analytics
+		initGA();
+
 	}
 
 	on_submit(event) {
@@ -85,6 +93,9 @@ class Create_New_Group extends Component {
         		// console.log('Submit');
         		window.confirm("¡La empresa ha sido creada exitosamente!");
 
+				// add event to GA
+				Event_GA("Group", "create new group", "new group");
+				
         		// // redirect to other path
         		const url = '/work_env_manag_home/dashboard_group/';
         		this.props.history.push(url.concat(ref.id, '/', group.name + '/'));
