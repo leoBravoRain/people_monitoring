@@ -23,6 +23,8 @@ export const PageView_GA = () => {
 // store events-actions of usre
 export const Event_GA = (category, action, label) => {
 
+    // console.log("new event of: " + action);
+    
     ReactGA.event({
       category: category,
       action: action,
