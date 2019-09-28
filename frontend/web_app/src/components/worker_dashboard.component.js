@@ -26,7 +26,7 @@ class Dashboard_Worker extends Component {
 
 					<div class="alert alert-success" role="alert">
 
-						Puedes estar tranquilo, ya que toda esta información es totalmente ANÓNIMA, por lo que nadie jamás sabrá quien envía esta información
+						Puedes estar tranquilo, ya que toda esta información es totalmente <b>ANÓNIMA</b>, por lo que nadie jamás sabrá quien envía esta información
 
 					</div>
 

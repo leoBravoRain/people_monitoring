@@ -131,11 +131,11 @@ class Create_New_Group extends Component {
 
 				</h2>
 
-				<div className="alert alert-danger" role="alert">
+				{/* <div className="alert alert-danger" role="alert">
 
 					Recuerda la contraseña que ingresaste, ya que debes escribirla cada vez que quieras ingresar al perfil de tu empresa
 
-				</div>
+				</div> */}
 
 				<form onSubmit={this.on_submit}>
 

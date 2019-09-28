@@ -120,7 +120,7 @@ class Home extends Component {
 
 	render() {
 
-		console.log(this);
+		// console.log(this);
 
 		return(
 
@@ -133,6 +133,23 @@ class Home extends Component {
 				</h2>
 
 				<div className="alert alert-primary" role="alert">
+
+					<p>
+
+						Desde acá puedes acceder a todas las areas de tu empresa.	
+
+					</p>
+
+					<p>
+
+						Si no tienes ningún área registrada, entonces selecciona "Crear nueva área"
+						
+					</p>
+					
+
+				</div>
+				
+				{/* <div className="alert alert-primary" role="alert">
 
 					<p>
 
@@ -166,7 +183,7 @@ class Home extends Component {
 
 					</div>
 
-				</div>
+				</div> */}
 
 				<p> 
 
