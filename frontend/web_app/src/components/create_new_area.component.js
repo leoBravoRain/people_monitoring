@@ -87,7 +87,8 @@ class Create_New_Area extends Component {
 
         		// redirect to other path
         		const url = '/work_env_manag_home/dashboard_group/';
-        		this.props.history.push(url.concat(this.props.match.params.group_id, '/',this.props.match.params.group_name, '/'));
+        		// this.props.history.push(url.concat(this.props.match.params.group_id, '/',this.props.match.params.group_name, '/'));
+				this.props.history.push(url.concat(this.props.match.params.group_id, '/',this.props.match.params.group_name));
 
             })
 

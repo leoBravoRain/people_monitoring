@@ -1,14 +1,8 @@
 import React, { Component } from "react";
 
-import { BrowserRouter as Route, Link } from "react-router-dom";
-
-// import Control_Risk from "./control_risk_list.component";
-
 // make request to server
-// import axios from 'axios';
 import {fs} from "../config/firebase";
-// import firebase from "firebase";
-// import "firebase/firestore";
+import firebase from "firebase";
 
 class Daily_Question extends Component {
 
@@ -33,13 +27,14 @@ class Daily_Question extends Component {
 	on_submit(calification) {
 
 		// get current date
-		var currentdate = new Date(); 
-		var datetime =  currentdate.getDate() + "/"
-		                + (currentdate.getMonth()+1)  + "/" 
-		                + currentdate.getFullYear() + " "  
-		                + currentdate.getHours() + ":"  
-		                + currentdate.getMinutes() + ":" 
-		                + currentdate.getSeconds()
+		// var currentdate = new Date(); 
+		// var datetime =  currentdate.getDate() + "/"
+		//                 + (currentdate.getMonth()+1)  + "/" 
+		//                 + currentdate.getFullYear() + " "  
+		//                 + currentdate.getHours() + ":"  
+		//                 + currentdate.getMinutes() + ":" 
+		//                 + currentdate.getSeconds();
+		var datetime = firebase.firestore.Timestamp.now();
 
 		// build body for post request
 		const calification_ = {

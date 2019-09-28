@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-import { BrowserRouter as Link } from "react-router-dom";
-
 // make request to server
-import axios from 'axios';
 import {fs} from "../config/firebase";
+import firebase from "firebase";
 
 class Manager_Action extends Component {
 
@@ -44,13 +42,14 @@ class Manager_Action extends Component {
 		event.preventDefault();
 		
 		// get current date
-		var currentdate = new Date(); 
-		var datetime =  currentdate.getDate() + "/"
-		                + (currentdate.getMonth()+1)  + "/" 
-		                + currentdate.getFullYear() + " "  
-		                + currentdate.getHours() + ":"  
-		                + currentdate.getMinutes() + ":" 
-		                + currentdate.getSeconds()
+		// var currentdate = new Date(); 
+		// var datetime =  currentdate.getDate() + "/"
+		//                 + (currentdate.getMonth()+1)  + "/" 
+		//                 + currentdate.getFullYear() + " "  
+		//                 + currentdate.getHours() + ":"  
+		//                 + currentdate.getMinutes() + ":" 
+		//                 + currentdate.getSeconds()
+		var datetime = firebase.firestore.Timestamp.now();
 
 		// build body for post request
 		const action_ = {

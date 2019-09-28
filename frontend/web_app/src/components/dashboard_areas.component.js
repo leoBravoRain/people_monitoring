@@ -15,13 +15,13 @@ import {fs, auth} from "../config/firebase";
 
 // ]
 
-// fake data
+/* // fake data
 var actions = [
 
 	{date: '22-03-2019', action: 'Se conversa con jefe directo para que mejore trato con trabajadores'},
 	{date: '25-03-2019', action: 'Se envía a jefe directo a couching para mejorar trato con colaboradores'}
 
-]
+] */
 
 // componentn itself
 class Dashboard_Areas extends Component {
@@ -61,7 +61,9 @@ class Dashboard_Areas extends Component {
 	get_data_from_API() {
 
 		// get request for get data
-        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("califications").get().then( snapshotquery => {
+		fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("califications")
+		.orderBy("date", "asc")
+		.get().then( snapshotquery => {
 
             	// data structure for chart data
             	const data = [];
@@ -72,7 +74,7 @@ class Dashboard_Areas extends Component {
 
             		// get data
             		data.push(doc.data().calification);
-            		labels.push(doc.data().date);
+            		labels.push(doc.data().date.toDate().toLocaleString());
 
     		    });
 
@@ -131,7 +133,9 @@ class Dashboard_Areas extends Component {
 
 		// get request for get data
         // axios.get('http://192.168.1.9:4000/people_monitoring/action_of_manager/' + this.props.match.params.area_id)
-        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("actions_of_manager").get().then( snapshotquery => {
+		fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("actions_of_manager")
+		.orderBy("date", "desc")
+		.get().then( snapshotquery => {
 
          		let actions = [];
 
@@ -142,7 +146,7 @@ class Dashboard_Areas extends Component {
  	        		const action = {
  	        			description: doc.data().description,
  	        			// date: doc.data().date.toDate().toString()
- 	        			date: doc.data().date,
+ 	        			date: doc.data().date.toDate().toLocaleString(),
  	        		}
 
  	        		actions.push(action);
@@ -176,7 +180,9 @@ class Dashboard_Areas extends Component {
 
 		// get request for messages from users
         // axios.get('http://192.168.1.9:4000/people_monitoring/message_from_worker/' + this.props.match.params.area_id)
-        fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("messages_from_workers").get().then( snapshotquery => {
+		fs.collection('groups').doc(this.props.match.params.group_id).collection('areas').doc(this.props.match.params.area_id).collection("messages_from_workers")
+		.orderBy("date", "desc")
+		.get().then( snapshotquery => {
 
             	// get data from API
             	// const messages = response.data;
@@ -189,7 +195,7 @@ class Dashboard_Areas extends Component {
 	        		const message = {
 	        			message: doc.data().message,
 	        			// date: doc.data().date.toDate().toString()
-	        			date: doc.data().date,
+	        			date: doc.data().date.toDate().toLocaleString(),
 	        		}
 
 	        		messages.push(message);
