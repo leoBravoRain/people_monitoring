@@ -18,6 +18,7 @@ class Create_New_Group extends Component {
 
 			name: null,
 			password: null,
+			user_id: null,
 		}
 
 		this.on_submit = this.on_submit.bind(this);
@@ -34,6 +35,12 @@ class Create_New_Group extends Component {
 		    if (user) {
 
 		      console.log("user logged");
+
+		      this.setState({
+
+		      	user_id: user.uid
+
+		      });
 
 		      // this.props.history.push('/work_env_manag_home/');
 
@@ -61,6 +68,7 @@ class Create_New_Group extends Component {
 
 			name: this.state.name,
 			password: this.state.password,
+			uid: this.state.user_id,
 
 		};
 

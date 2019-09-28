@@ -205,7 +205,7 @@ class Home extends Component {
 									<td> {idx + 1} </td>
 									<td> 
 
-										<Link to = { this.props.match.url.concat('dashboard_area/', area._id, '/', area.name)}>
+										<Link to = { this.props.match.url.concat('/dashboard_area/', area._id, '/', area.name)}>
 
 											{area.name} 
 												

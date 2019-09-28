@@ -17,7 +17,8 @@ import Create_New_Area from './components/create_new_area.component';
 import Dashboard_Areas from './components/dashboard_areas.component';
 import Dashboard_Worker from './components/worker_dashboard.component';
 import Login_Worker from './components/login_worker.component';
-import Login_to_Group from './components/login_to_group.component';
+// import Login_to_Group from './components/login_to_group.component';
+import List_of_Groups from './screens/list_of_groups.screen'
 import Manager_Action from './components/create_new_action_of_manager.component'
 import Manager_Login from "./screens/login_manager.screen";
 
@@ -118,7 +119,7 @@ class App extends Component {
 
         {/* create group /login manager */}
         <Route path = '/work_env_manag_home/create_new_group/' exact component = {Create_New_Group} />
-        <Route path = '/work_env_manag_home/login_to_group/' exact component = {Login_to_Group} />
+        <Route path = '/work_env_manag_home/login_to_group/' exact component = {List_of_Groups} />
 
         {/*dash board of group */}
         <Route path = '/work_env_manag_home/dashboard_group/:group_id/:group_name/' exact component = {Work_Env_Manager_Dashboard} />

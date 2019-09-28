@@ -10,7 +10,7 @@ class Dashboard_Worker extends Component {
 
 	render() {
 
-		// console.log(this);
+	// console.log(this);
 
 		return(
 

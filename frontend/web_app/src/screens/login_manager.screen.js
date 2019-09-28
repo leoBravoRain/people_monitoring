@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // make request to server
-import axios from 'axios';
+// import axios from 'axios';
 import {fs, auth} from "../config/firebase";
 
 class Manager_Login extends Component {

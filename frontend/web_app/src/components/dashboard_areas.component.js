@@ -4,7 +4,7 @@ import { BrowserRouter as Link } from "react-router-dom";
 
 import {Line} from 'react-chartjs-2';
 // make request to server
-import axios from 'axios';
+// import axios from 'axios';
 import {fs, auth} from "../config/firebase";
 // fake data
 // var messages = [
