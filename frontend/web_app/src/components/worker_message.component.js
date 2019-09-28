@@ -100,7 +100,17 @@ class Worker_Message extends Component {
 
 				<p className="alert alert-primary" role="alert">
 
-					Con tu información el encargado de clima laboral puede saber con más detalle el estado actual del ambiente laboral. Puedes informarle por ejemplo, alguna experiencia negativa/positiva con algún compañero o jefe del área.
+					<p> 
+						
+						Con tu información, el encargado de clima laboral puede saber con más detalle el estado actual del ambiente laboral. Puedes informarle por ejemplo, alguna experiencia negativa/positiva con algún compañero o jefe del área.
+
+					</p>
+
+					<p>
+
+						Recuerda que este mensaje es <b> COMPLETAMENTE ANÓNIMO</b>.
+
+					</p>
 
 				</p>
 

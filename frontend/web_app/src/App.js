@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.js';
 
 // import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 
