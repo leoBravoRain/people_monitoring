@@ -22,6 +22,9 @@ import Login_Worker from './components/login_worker.component';
 import List_of_Groups from './screens/list_of_groups.screen'
 import Manager_Action from './components/create_new_action_of_manager.component'
 import Manager_Login from "./screens/login_manager.screen";
+import Demo_Home from "./screens/demo/home_demo.screen";
+import Dashboard_Worker_Demo from "./screens/demo/worker_dashboard_demo.screen";
+
 
 // Component 
 class App extends Component {
@@ -109,6 +112,11 @@ class App extends Component {
 
         {/* Home */}
         <Route path = '/' exact component = {Home} />
+
+        {/* demo home */}
+        <Route path = "/demo_home/" exact component = {Demo_Home} />
+        {/* worker dashboard demo */}
+        <Route path = "/demo_home/worker_dashboard/" exact component = {Dashboard_Worker_Demo} />
 
         {/* manager login */}
         <Route path = "/work_env_manag_login/" exact component = {Manager_Login} />
